@@ -1,0 +1,62 @@
+/* Estilo para el contenedor principal de las tarjetas */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* Centrar las tarjetas horizontalmente */
+    gap: 20px;
+    /* Espacio entre las tarjetas */
+}
+
+/* Estilo para las tarjetas individuales */
+.card {
+    width: 300px;
+    /* Ancho de cada tarjeta */
+    padding: 15px;
+    /* Espaciado interior de la tarjeta */
+    border: 1px solid #ccc;
+    /* Borde de la tarjeta */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Sombra de la tarjeta */
+    transition: transform 0.3s;
+    /* Efecto de transformación al pasar el ratón */
+    cursor: pointer;
+}
+
+/* Estilo para el título de la tarjeta */
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Estilo para el texto de la tarjeta */
+.card-text {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Efecto de escala al pasar el ratón sobre la tarjeta */
+.card:hover {
+    transform: scale(1.05);
+    /* Escala un poco más grande */
+}
+
+/* Estilo para las imágenes en las tarjetas */
+.card-img-top {
+    width: 100%;
+    /* Ancho del 100% para que se ajuste al contenedor */
+    height: auto;
+    /* Altura automática para mantener la proporción original */
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0069d9;
+}

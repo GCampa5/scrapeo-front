@@ -1,0 +1,29 @@
+.card {
+    transition: transform 0.3s;
+    /* Efecto de transformación al pasar el ratón */
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    /* Escala un poco más grande */
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 0.875rem;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0069d9;
+}

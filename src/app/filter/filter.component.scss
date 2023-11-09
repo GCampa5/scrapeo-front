@@ -1,0 +1,19 @@
+h2 {
+    margin-top: 20px; /* Agrega un margen inferior para separar el título de los filtros */
+    color: #333; /* Cambia el color de texto a tu preferencia */
+  }
+  
+.form-container {
+    margin: 20px;  /* Márgenes exteriores del contenedor del formulario */
+    padding: 20px; /* Relleno interior del contenedor del formulario */
+    
+    .form-group {
+      margin-bottom: 15px; /* Espacio entre elementos del formulario */
+    }
+    
+    .btn-primary {
+      margin-top: 10px; /* Espacio entre el formulario y el botón */
+    }
+  }
+
+  

@@ -1,0 +1,23 @@
+<div class="loading-overlay" *ngIf="showProgressBar">
+    <fa-icon [icon]="faSpinner" class="fa-spin" style="font-size: 64px"></fa-icon>
+</div>
+<div class="container">
+    <h2 class="text-center">Buscar noticias en el País</h2>
+    <form (ngSubmit)="ejecutarScript()" #filtroForm="ngForm" class="form-container mx-auto">
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="tag">Categoría:</label>
+                <select id="tag" name="tag" class="form-control" [(ngModel)]="filtros.categoria">
+                    <option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</option>
+                </select>
+            </div>
+            <div class="form-group col-md-12">
+                <label for="fechaLimite">Buscar hasta la fecha:</label>
+                <input type="date" id="fechaLimite" placeholder="Introduce una fecha hasta el año 2000" name="fechaLimite" class="form-control" [(ngModel)]="filtros.fechaLimite" (blur)="validarFecha()">
+                <div *ngIf="fechaInvalida" class="text-danger">Introduzca una fecha válida (entre 2010 y la fecha actual).</div>
+            </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary" [disabled]="!habilitarBoton">Ejecutar</button>
+    </form>
+</div>

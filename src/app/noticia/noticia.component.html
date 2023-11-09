@@ -1,0 +1,35 @@
+<div class="container mt-5">
+  <h1>Noticias</h1>
+  <div class="row">
+    <div class="current-page-container">
+      <fa-icon [icon]="faList"></fa-icon>
+      <span class="current-page">Página: {{ currentPage }}</span>
+      <span class="total-pages">de {{ totalPages }}</span>
+    </div>
+    <p>Número de noticias encontradas: <strong>{{ totalNews }}</strong></p>
+    <div class="col-md-12" *ngFor="let noticia of noticias">
+      <div class="card mb-12">
+        <div class="card-body">
+          <h5 class="card-title">{{ noticia.Title }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{ noticia.Date }}</h6>
+          <p class="card-text">{{ noticia.Tag }}</p>
+          <p class="card-text">Autor: {{ noticia.Author }}</p>
+          <p class="card-text">{{ noticia.Content }}</p>
+          <p class="card-text">Enlace: <a [href]="noticia.Link" target="_blank">{{ noticia.Link }}</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-4">
+    <ul class="pagination justify-content-end">
+      <li class="page-item">
+        <button class="page-link" [disabled]="currentPage === 1" (click)="changePage(currentPage - 1)"
+          [ngClass]="{'disabled-button': currentPage === 1}">Anterior</button>
+      </li>
+      <li class="page-item">
+        <button class="page-link" [disabled]="currentPage >= totalPages" (click)="changePage(currentPage + 1)"
+          [ngClass]="{'disabled-button': currentPage >= totalPages}">Siguiente</button>
+      </li>
+    </ul>
+  </div>

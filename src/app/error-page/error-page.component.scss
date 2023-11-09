@@ -1,0 +1,38 @@
+.error-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  .error-title {
+    font-size: 36px;
+    color: #d9534f; /* Color de error rojo */
+  }
+
+  .error-message {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+
+  .home-link {
+    display: block;
+    margin-top: 20px;
+    text-decoration: none;
+    background-color: #337ab7; /* Color de enlace azul */
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+
+  .home-link:hover {
+    background-color: #286090; /* Color de enlace azul oscuro al pasar el ratón */
+  }
