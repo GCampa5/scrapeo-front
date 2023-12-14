@@ -8,6 +8,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { authGuard } from './auth/auth.guard'; 
 import { SearchTypeComponent } from './search-type/search-type.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { BuscarVideosComponent } from './buscar-videos/buscar-videos.component';
+import { InfoVideosComponent } from './info-videos/info-videos.component';
 
 const routes: Routes = [
   {
@@ -24,6 +26,8 @@ const routes: Routes = [
   { path: 'buscar_noticias', component: ScrapComponent, canActivate: [authGuard] },
   { path: 'error_page', component: ErrorPageComponent, canActivate: [authGuard] },
   { path: 'tipo_busqueda', component: SearchTypeComponent, canActivate: [authGuard] },
+  { path: 'buscar_videos', component: BuscarVideosComponent, canActivate: [authGuard] },
+  { path: 'videos_info', component: InfoVideosComponent, canActivate: [authGuard] },
   { path: '**', component: ErrorPageComponent },
 ];
 

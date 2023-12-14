@@ -15,7 +15,7 @@ export class NoticiaService {
     return this.http.post(scrapUrl, data);
   }
 
-  buscarNoticias(filtros: any, page: number): Observable<any> {
+  buscarNoticias(filtros: any, page: number, user_id: string): Observable<any> {
     // Convierte los filtros en parámetros de consulta
     let params = new HttpParams();
     for (let key in filtros) {
@@ -25,6 +25,10 @@ export class NoticiaService {
     }
 
     params = params.set('page', page);
+    if (user_id) {
+      params = params.set('user_id', user_id);
+    }
+
     return this.http.get('http://localhost:8000/ScrapeoApp/buscar_noticias/', { params: params });
   }
 }

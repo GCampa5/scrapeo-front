@@ -14,6 +14,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SearchTypeComponent } from './search-type/search-type.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { BuscarVideosComponent } from './buscar-videos/buscar-videos.component';
+import { InfoVideosComponent } from './info-videos/info-videos.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { ErrorPageComponent } from './error-page/error-page.component';
     FilterComponent,
     ScrapComponent,
     SearchTypeComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    BuscarVideosComponent,
+    InfoVideosComponent
   ],
   imports: [
     BrowserModule,

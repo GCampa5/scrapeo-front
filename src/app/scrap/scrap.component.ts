@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NoticiaService } from '../services/noticia.service';
 import { Router } from '@angular/router';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-scrap',
@@ -12,7 +13,7 @@ export class ScrapComponent {
   faSpinner = faSpinner;
   filtros: any = {};
   fechaInvalida: boolean = false;
-  categorias: string[] = ['ARQUEOLOGIA', 'EXPOLIOS', 'CULTURA'];
+  categorias: string[] = ['ARQUEOLOGIA', 'EXPOLIOS', 'CULTURA', 'HALLAZGO-ARQUEOLOGICO'];
   fechaActual: Date = new Date();
   habilitarBoton: boolean = false;
 
@@ -22,6 +23,7 @@ export class ScrapComponent {
   constructor(
     private noticiaService: NoticiaService,
     private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -31,11 +33,14 @@ export class ScrapComponent {
     this.showProgressBar = true;  
     const categoria = this.filtros.categoria.toLowerCase();
 
+    const user_id = this.authService.getUserId();
+    console.log('ID del Usuario:', user_id);
     console.log('Categoría:', categoria);
     console.log('Año límite:', this.filtros.fechaLimite);
     console.log('URL de la solicitud:', this.apiBaseUrl + 'scraping_elpais/');
     
     const data = {
+        user_id: user_id,
         categoria: categoria,
         fechaLimite: this.filtros.fechaLimite
     };
@@ -44,7 +49,8 @@ export class ScrapComponent {
       (response) => {
         this.showProgressBar = false;  // Oculta la barra de progreso al terminar
         console.log(response);
-        this.router.navigate(['/filtro_noticia']);
+        alert("Script ejecutado correctamente");
+        this.router.navigate(['/home']);
       },
       (error) => {
         this.showProgressBar = false

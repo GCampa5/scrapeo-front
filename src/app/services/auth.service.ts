@@ -16,6 +16,17 @@ export class AuthService {
     this.checkToken();
   }
 
+  getUserId(): string | null {
+    const access_token = this.getAccessToken();
+
+    if (access_token) {
+      const decodedToken = helper.decodeToken(access_token);
+      return decodedToken ? decodedToken.user_id : null;
+    }
+
+    return null;
+  }
+
   setAuthenticated(value: boolean) {
     this.isAuthenticated = value;
   }

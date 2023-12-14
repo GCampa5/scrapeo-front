@@ -1,0 +1,42 @@
+<div class="loading-overlay" *ngIf="showProgressBar">
+  <fa-icon [icon]="faSpinner" class="fa-spin" style="font-size: 64px"></fa-icon>
+</div>
+<div class="container">
+  <h2 class="text-center">Buscar vídeos en Youtube</h2>
+  <form (ngSubmit)="buscar_videos()" #filtroForm="ngForm" class="form-container mx-auto">
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="tag">Introduce tu búsqueda:</label>
+        <input type="text" id="query" name="query" class="form-control" [(ngModel)]="query">
+      </div>
+      <div class="form-group col-md-12">
+        <label for="fechaLimite">Número de resultados:</label>
+        <input type="number" id="max_results" placeholder="Cuantos vídeos quieres buscar" name="max_results"
+          class="form-control" [(ngModel)]="max_results" (blur)="validarMaximo()">
+        <div *ngIf="valMax" class="text-danger">Introduzca un valor menor a 20</div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" id="search-button">Buscar</button>
+  </form>
+
+  <div *ngIf="showVideos" class="container mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h3>Videos Buscados</h3>
+      <button class="btn btn-dark ml-auto" routerLink="/videos_info" [disabled]="selectedVideos.length === 0">
+        Ver detalles&nbsp;&nbsp;<fa-icon [icon]="faInfo"></fa-icon> 
+      </button>
+    </div>
+    <div class="row mt-4">
+      <div *ngFor="let video of videos" class="col-md-4 mb-4">
+        <div class="video-container" id="{{ video.id }}" (click)="selectVideo(video.id)"
+          [ngClass]="{'selected-video': isSelected(video.id)}">
+          <div class="video-inner-container">
+            <img [src]="video.thumbnail" alt="{{ video.title }}" class="img-fluid">
+            <div class="video-title"><strong>{{ video.title }}</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

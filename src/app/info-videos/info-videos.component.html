@@ -1,0 +1,69 @@
+<div class="container mt-5">
+  <h1>Vídeos</h1>
+  <div class="row">
+    <div class="col-md-12" *ngFor="let video of videos">
+      <div class="card mb-12">
+        <div class="card-body">
+          <h5 class="card-title">{{ video.video_title }}</h5>
+          <p class="card-text" style="margin-top: 10px;"><strong>Fecha de subida: </strong><span>{{ video.published_at }}</span></p>
+          <p class="card-text"><strong>Autor: </strong> {{ video.channel_title }}</p>
+          <p class="card-text"><strong>Descripción: </strong>{{ video.description }}</p>
+          <p class="card-text"><strong>Enlace: </strong> <a [href]="video.link" target="_blank">{{ video.link }}</a></p>
+          <button class="btn btn-primary btn-sm" style="float: right;" (click)="openComentariosModal(video.video_id)">Ver comentarios</button>
+          <button class="btn btn-primary btn-sm" style="float: left;"
+            (click)="openTranscriptionModal(video.video_id)">Ver
+            transcripción</button>
+          <div #transcriptionModal class="modal fade" tabindex="-1" role="dialog"
+            aria-labelledby="transcriptionModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="transcriptionModalLabel">Transcripción</h5>
+                  <button type="button" class="close" (click)="closeTranscriptionModal()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <!-- Contenido dinámico obtenido de la API -->
+                  {{ transcripcionContenido }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div #comentariosModal class="modal fade" tabindex="-1" role="dialog" aria-labelledby="comentariosModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="comentariosModalLabel">Configuración de Comentarios</h5>
+                  <button type="button" class="close" (click)="closeComentariosModal()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <label for="cantidadComentarios">Número de comentarios a mostrar:</label>&nbsp;
+                  <input type="number" id="cantidadComentarios" [(ngModel)]="maxResults" />
+
+                  <button class="btn btn-secondary btn-sm" style="margin-top: 15px;" (click)="buscarComentarios()">Buscar <fa-icon [icon]="faSearch"></fa-icon></button>
+
+                  <!-- Puedes mostrar los comentarios aquí dentro del modal -->
+                  <div *ngIf="showComentarios">
+                    <h4 style="margin-top: 20px;">Comentarios</h4>
+                    <ng-container *ngIf="activeComments.length > 0; else noComments">
+                      <ul>
+                        <li *ngFor="let comentario of activeComments">{{ comentario }}</li>
+                      </ul>
+                    </ng-container>
+                    <ng-template #noComments>
+                      <p><fa-icon [icon]="faError"></fa-icon> No se han encontrado comentarios para este video.</p>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
