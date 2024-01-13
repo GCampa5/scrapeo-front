@@ -75,7 +75,7 @@ export class BuscarVideosComponent {
   validarMaximo() {
     const button = document.getElementById('search-button');
     if (button != null) {
-      if (this.max_results >= 20) {
+      if (this.max_results >= 51) {
         this.valMax = true;
         button.setAttribute('disabled', 'disabled');
       }

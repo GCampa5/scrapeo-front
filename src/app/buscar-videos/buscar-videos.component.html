@@ -13,7 +13,7 @@
         <label for="fechaLimite">Número de resultados:</label>
         <input type="number" id="max_results" placeholder="Cuantos vídeos quieres buscar" name="max_results"
           class="form-control" [(ngModel)]="max_results" (blur)="validarMaximo()">
-        <div *ngIf="valMax" class="text-danger">Introduzca un valor menor a 20</div>
+        <div *ngIf="valMax" class="text-danger">Introduzca un valor menor a 50</div>
       </div>
     </div>
 
