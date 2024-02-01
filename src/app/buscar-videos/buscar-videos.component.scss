@@ -60,3 +60,19 @@ h2 {
   box-shadow: 0 0 5px #00f;
   /* Efecto de sombra para resaltar */
 }
+
+.no-videos-container {
+  text-align: center;
+  padding: 20px;
+  border: 3px solid #5e5959; 
+  border-radius: 10px;
+  margin: 0 auto; /* Centrar horizontalmente */
+  margin-top: 20vh; /* Centrar verticalmente */
+  max-width: 450px; /* Ancho máximo del contenedor */
+}
+
+.no-videos-message {
+  font-size: large;
+  font-weight: bold;
+  margin-bottom: 10px;
+}

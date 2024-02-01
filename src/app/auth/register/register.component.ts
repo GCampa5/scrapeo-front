@@ -12,13 +12,18 @@ export class RegisterComponent {
   password: string = '';
   confirmPassword: string = ''; 
   passwordsDoNotMatch = false;
+  fieldsAreEmpty = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   register() {
-    console.log(this.username);
-    console.log(this.password);
-    console.log(this.confirmPassword);
+    // Verifica si los campos obligatorios están vacíos
+    if (this.username.trim() === '' || this.password.trim() === '' || this.confirmPassword.trim() === '') {
+      // Al menos uno de los campos obligatorios está vacío
+      this.fieldsAreEmpty = true;
+      return;
+    }
+
     // Verifica si las contraseñas coinciden
     if (this.password === this.confirmPassword) {
       // Las contraseñas coinciden, puedes proceder con el registro

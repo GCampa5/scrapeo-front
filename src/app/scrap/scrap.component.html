@@ -12,6 +12,12 @@
                 </select>
             </div>
             <div class="form-group col-md-12">
+                <label for="fechaInicio">Buscar desde la fecha:</label>
+                <input type="date" id="fechaInicio" placeholder="Introduce una fecha desde el año 2010" name="fechaInicio" class="form-control" [(ngModel)]="filtros.fechaInicio" (blur)="validarFecha()">
+                <div *ngIf="fechaInicioInvalida" class="text-danger">Introduzca una fecha válida (entre 2010 y la fecha límite).</div>
+                <div *ngIf="errorFechaMayorFechaLimite" class="text-danger">La fecha de inicio no puede ser posterior a la fecha límite o actual</div>
+            </div>
+            <div class="form-group col-md-12">
                 <label for="fechaLimite">Buscar hasta la fecha:</label>
                 <input type="date" id="fechaLimite" placeholder="Introduce una fecha hasta el año 2000" name="fechaLimite" class="form-control" [(ngModel)]="filtros.fechaLimite" (blur)="validarFecha()">
                 <div *ngIf="fechaInvalida" class="text-danger">Introduzca una fecha válida (entre 2010 y la fecha actual).</div>

@@ -20,23 +20,30 @@
     <button type="submit" class="btn btn-primary" id="search-button">Buscar</button>
   </form>
 
-  <div *ngIf="showVideos" class="container mb-4">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <h3>Videos Buscados</h3>
-      <button class="btn btn-dark ml-auto" routerLink="/videos_info" [disabled]="selectedVideos.length === 0">
-        Ver detalles&nbsp;&nbsp;<fa-icon [icon]="faInfo"></fa-icon> 
-      </button>
+  <div *ngIf="videosNotFound; else videosBlock">
+    <div class="no-videos-container">
+      <h3 class="no-videos-message">No se encontraron vídeos.</h3>
     </div>
-    <div class="row mt-4">
-      <div *ngFor="let video of videos" class="col-md-4 mb-4">
-        <div class="video-container" id="{{ video.id }}" (click)="selectVideo(video.id)"
-          [ngClass]="{'selected-video': isSelected(video.id)}">
-          <div class="video-inner-container">
-            <img [src]="video.thumbnail" alt="{{ video.title }}" class="img-fluid">
-            <div class="video-title"><strong>{{ video.title }}</strong></div>
+  </div>
+  <ng-template #videosBlock>
+    <div *ngIf="showVideos" class="container mb-4">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3>Videos Buscados</h3>
+        <button class="btn btn-dark ml-auto" routerLink="/videos_info" [disabled]="selectedVideos.length === 0">
+          Ver detalles&nbsp;&nbsp;<fa-icon [icon]="faInfo"></fa-icon>
+        </button>
+      </div>
+      <div class="row mt-4">
+        <div *ngFor="let video of videos" class="col-md-4 mb-4">
+          <div class="video-container" id="{{ video.id }}" (click)="selectVideo(video.id)"
+            [ngClass]="{'selected-video': isSelected(video.id)}">
+            <div class="video-inner-container">
+              <img [src]="video.thumbnail" alt="{{ video.title }}" class="img-fluid">
+              <div class="video-title"><strong>{{ video.title }}</strong></div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </ng-template>
 </div>

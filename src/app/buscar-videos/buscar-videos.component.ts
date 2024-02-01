@@ -20,14 +20,11 @@ export class BuscarVideosComponent {
   videos: any 
   showVideos: boolean = false;
   selectedVideos: string[] = [];
-
-  private apiBaseUrl = 'http://localhost:8000/ScrapeoApp/';
+  videosNotFound: boolean = false;
 
   constructor(
     private videoService: VideoService,
-    private router: Router,
     private videoShared: VideoSharedService
-    //private authService: AuthService  por si hiciese falta el id
   ) { }
 
   buscar_videos() {
@@ -69,6 +66,7 @@ export class BuscarVideosComponent {
   mostrarVideos(response: any) {
     this.videos = response.videos;
     this.showVideos = true;
+    this.videosNotFound = this.videos.length === 0;
   }
 
 

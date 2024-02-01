@@ -18,6 +18,7 @@ export class NoticiaComponent implements OnInit {
   currentPage: number = 1;
   totalPages: number = 100;
   totalNews: number | undefined;
+  noticiasNotFound: boolean = false; 
   faList = faListAlt
 
   constructor(private noticiaService: NoticiaService, private filtroSharedService: FiltroSharedService, private location: Location, private authService: AuthService) { }
@@ -34,6 +35,7 @@ export class NoticiaComponent implements OnInit {
         this.noticias = response.results;
         this.totalNews = response.count;
         this.totalPages = Math.ceil(response.count / 10);
+        this.noticiasNotFound = this.noticias.length === 0;  // Establecer el valor del booleano
       });
     }
   }

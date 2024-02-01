@@ -13,7 +13,9 @@ export class ScrapComponent {
   faSpinner = faSpinner;
   filtros: any = {};
   fechaInvalida: boolean = false;
-  categorias: string[] = ['ARQUEOLOGIA', 'EXPOLIOS', 'CULTURA', 'HALLAZGO-ARQUEOLOGICO'];
+  fechaInicioInvalida: boolean = false;
+  errorFechaMayorFechaLimite: boolean = false;
+  categorias: string[] = ['ARQUEOLOGIA', 'EXPOLIOS', 'CULTURA', 'HALLAZGO ARQUEOLOGICO'];
   fechaActual: Date = new Date();
   habilitarBoton: boolean = false;
 
@@ -28,21 +30,18 @@ export class ScrapComponent {
 
   ngOnInit(): void {
   }
-  
-  ejecutarScript() {
-    this.showProgressBar = true;  
-    const categoria = this.filtros.categoria.toLowerCase();
 
+  ejecutarScript() {
+    this.showProgressBar = true;
+    const categoria = this.filtros.categoria.toLowerCase().replace(/\s+/g, '-');
+    console.log(categoria);
     const user_id = this.authService.getUserId();
-    console.log('ID del Usuario:', user_id);
-    console.log('Categoría:', categoria);
-    console.log('Año límite:', this.filtros.fechaLimite);
-    console.log('URL de la solicitud:', this.apiBaseUrl + 'scraping_elpais/');
-    
+
     const data = {
-        user_id: user_id,
-        categoria: categoria,
-        fechaLimite: this.filtros.fechaLimite
+      user_id: user_id,
+      categoria: categoria,
+      fechaLimite: this.filtros.fechaLimite,
+      fechaInicio: this.filtros.fechaInicio
     };
 
     this.noticiaService.ejecutarScriptElPais(data).subscribe(
@@ -61,16 +60,30 @@ export class ScrapComponent {
   }
 
   validarFecha() {
+    const fechaInicio = new Date(this.filtros.fechaInicio);
     const fechaLimite = new Date(this.filtros.fechaLimite);
     const fechaMinima = new Date('2010-01-01');
-    
+
+    // Comprobación de la fecha límite
     if (fechaLimite < fechaMinima || fechaLimite > this.fechaActual) {
       this.fechaInvalida = true;
     } else {
       this.fechaInvalida = false;
     }
-  
+
+    // Comprobación de la fecha inicial
+    if (fechaInicio < fechaMinima) {
+      this.fechaInicioInvalida = true;
+    } 
+    else if (fechaInicio > fechaLimite || fechaInicio > this.fechaActual) {
+      this.errorFechaMayorFechaLimite = true;
+    }
+    else {
+      this.fechaInicioInvalida = false;
+      this.errorFechaMayorFechaLimite = false;
+    }
+
     // Verifica si el botón debe estar habilitado o deshabilitado
-    this.habilitarBoton = !this.fechaInvalida;
+    this.habilitarBoton = !this.fechaInvalida && !this.fechaInicioInvalida &&!this.errorFechaMayorFechaLimite;
   }
 }
